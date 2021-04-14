@@ -3,4 +3,4 @@
 
 cp :: [[a]] -> [[a]]
 cp [] = [[]]
-cpp xss = 
+cp xss = sequence xss 
