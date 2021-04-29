@@ -10,10 +10,12 @@
 --df [x] = [x+1]
 --df (x:y:xs) = (x+1) : y : df xs
 
-
 gf :: (a -> a) -> [a] -> [a]
-gf _ [] = []
-gf abs [x] = [abs x]
-gf abs (x:y:xs) = (abs x) : y : gf abs xs
-gf f [x] = [x+1]
-gf f (x:y:xs) = (x+1) : y : gf f xs
+gf g [x] = [g x]
+gf g (x:y:xs) = (g x) : y : gf g xs
+
+--gf _ [] = []
+--gf abs [x] = [abs x]
+--gf abs (x:y:xs) = (abs x) : y : gf abs xs
+--gf _ [x] = [(+1) x]
+--gf _ (x:y:xs) = (add x 1) : y : gf f (+1) xs
