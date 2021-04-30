@@ -11,3 +11,9 @@ countAces :: [Card] -> Int
 countAces [] = 0
 countAces [x] | x == Joker = 1
               | otherwise = cardValue x
+countAces (x:xs) = countAces [x] + countAces xs
+
+
+--Copy of possible input as an example. The input below will return 2
+--countAces[Joker, (NormalCard King Spades), (NormalCard Ace Hearts), (NormalCard (Numeric 5) Clubs)]
+
