@@ -3,15 +3,12 @@
 -- showT (runTM (tmPal (Tape blanks 'a' ("bbb" ++ blanks))))
 -- where a is the first char on the tape and bbb is the rest of the tape. if only 1 char use (Tape blanks 'a' blanks)
 
-
 --Representation of input tape for a Turing Machine
 data Tape a = Tape [a] a [a]
 
---Operations to move left or right on the tape
+--Operations to move left or right and write on the tape 
 moveLeft  (Tape (x:xs) y zs) = Tape xs x (y:zs)
 moveRight (Tape xs y (z:zs)) = Tape (y:xs) z zs
-
---Operation to write the symbol on the tape
 write (Tape xs y zs) a = Tape xs a zs
 
 data TM a s = TM [a] 
@@ -26,10 +23,10 @@ runTM (TM as ss s0 t0 tf) =
       Nothing       -> t0
       Just (s1,t1) -> runTM (TM as ss s1 t1 tf)
 
-showT (Tape xs y zs) =
-             y
+showT (Tape xs y zs) = y
 
 blanks = repeat ' '
+
 --implementation of the Turing machinie
 palin:: Int -> Tape Char -> Maybe(Int, Tape Char)
 palin s t@(Tape _ a _) = 
@@ -60,13 +57,6 @@ palin s t@(Tape _ a _) =
       (30,'a') -> Nothing
       (30,'b') -> Nothing
       _        -> error (show s ++ show a)
-
---tPal1, tPal2, tPal3, tPal4 :: Tape Char
---tPal1 = Tape blanks 'a' ("bba" ++ blanks)
---tPal2 = Tape blanks 'b' ("aabaab" ++ blanks)
---tPal3 = Tape blanks ' ' blanks
---tPal4 = Tape blanks 'b' blanks
---tPal5 = Tape blanks 'a' ("bab" ++ blanks)
 
 tmPal :: Tape Char -> TM Char Int
 tmPal t = TM " abYN" [0,10,11,12,20,21,22,30] 0 t palin
